@@ -25,5 +25,6 @@
 
   <modules>
     <module>shared-dependencies</module>
+    <module>spring-dependencies</module>
   </modules>
 </project>
