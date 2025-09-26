@@ -163,6 +163,9 @@
               <reflowLongStrings>true</reflowLongStrings>
             </googleJavaFormat>
             <removeUnusedImports />
+            <importOrder>
+              <order>#,java,javax,jakarta,org,com,,com.turtleby</order>
+            </importOrder>
           </java>
         </configuration>
         <executions>
