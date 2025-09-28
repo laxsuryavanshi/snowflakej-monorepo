@@ -1,4 +1,4 @@
-package com.turtleby.ymsql.dao;
+package com.turtleby.ymsql.core.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.turtleby.ymsql.model.SqlOperationSpec;
+import com.turtleby.ymsql.core.model.SqlOperationSpec;
 
 @DisplayName("SqlOperationRegistry Tests")
 class SqlOperationRegistryTest {

@@ -1,4 +1,4 @@
-package com.turtleby.ymsql.util;
+package com.turtleby.ymsql.spring.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -21,11 +21,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
-import com.turtleby.ymsql.model.SqlOperationSpec;
-import com.turtleby.ymsql.model.SqlOperationSpec.SqlOperationType;
-import com.turtleby.ymsql.model.SqlParameter;
-import com.turtleby.ymsql.model.SqlParameterMode;
-import com.turtleby.ymsql.model.SqlParameterType;
+import com.turtleby.ymsql.core.model.SqlOperationSpec;
+import com.turtleby.ymsql.core.model.SqlOperationSpec.SqlOperationType;
+import com.turtleby.ymsql.core.model.SqlParameter;
+import com.turtleby.ymsql.core.model.SqlParameterMode;
+import com.turtleby.ymsql.core.model.SqlParameterType;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("SqlOperationSpecLoader Tests")

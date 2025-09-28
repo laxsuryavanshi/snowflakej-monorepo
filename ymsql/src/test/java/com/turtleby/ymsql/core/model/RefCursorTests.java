@@ -1,4 +1,4 @@
-package com.turtleby.ymsql.model;
+package com.turtleby.ymsql.core.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

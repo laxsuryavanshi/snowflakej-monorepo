@@ -1,4 +1,4 @@
-package com.turtleby.ymsql.autoconfigure;
+package com.turtleby.ymsql.spring.autoconfigure;
 
 import java.util.Map;
 
@@ -8,9 +8,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ResourceLoader;
 
-import com.turtleby.ymsql.dao.SqlOperationRegistry;
-import com.turtleby.ymsql.model.SqlOperationSpec;
-import com.turtleby.ymsql.util.SqlOperationSpecLoader;
+import com.turtleby.ymsql.core.dao.SqlOperationRegistry;
+import com.turtleby.ymsql.core.model.SqlOperationSpec;
+import com.turtleby.ymsql.spring.util.SqlOperationSpecLoader;
 
 @ConditionalOnProperty(
     prefix = "ymsql",

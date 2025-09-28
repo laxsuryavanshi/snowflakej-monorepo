@@ -1,8 +1,6 @@
-package com.turtleby.ymsql.model;
+package com.turtleby.ymsql.core.model;
 
 import java.util.Objects;
-
-import org.springframework.util.Assert;
 
 /**
  * Represents a parameter specification for SQL operations including stored procedures.
@@ -36,55 +34,37 @@ import org.springframework.util.Assert;
  *     .build();
  * }</pre>
  *
- * <p>This class is mutable for framework convenience but should be treated as immutable after
- * initial configuration.
+ * <p>This class is immutable after creation.
  */
 public class SqlParameter {
+
   private static final String SEPARATOR = ":";
 
   /** The parameter name (optional, for documentation purposes). */
-  private String name;
+  private final String name;
 
   /** The parameter data type. */
-  private SqlParameterType type;
+  private final SqlParameterType type;
 
   /** The parameter mode (IN/OUT/INOUT/REFCURSOR). */
-  private SqlParameterMode mode = SqlParameterMode.IN;
-
-  public SqlParameter() {}
+  private final SqlParameterMode mode;
 
   public SqlParameter(final String name, final SqlParameterType type, final SqlParameterMode mode) {
     this.name = name;
     this.type = type;
-    this.mode = mode;
-  }
-
-  public SqlParameter(final SqlParameterBuilder builder) {
-    this(builder.name, builder.type, builder.mode);
+    this.mode = mode != null ? mode : SqlParameterMode.IN;
   }
 
   public String getName() {
     return name;
   }
 
-  public void setName(final String name) {
-    this.name = name;
-  }
-
   public SqlParameterType getType() {
     return type;
   }
 
-  public void setType(final SqlParameterType type) {
-    this.type = type;
-  }
-
   public SqlParameterMode getMode() {
     return mode;
-  }
-
-  public void setMode(final SqlParameterMode mode) {
-    this.mode = mode;
   }
 
   /** Check if this parameter requires input value. */
@@ -141,8 +121,8 @@ public class SqlParameter {
    * @return the SqlParameter instance
    * @throws IllegalArgumentException if the format is invalid
    */
-  public static SqlParameter fromString(final String param) {
-    Assert.notNull(param, "Parameter string cannot be null");
+  public static SqlParameter fromString(final String param) throws IllegalArgumentException {
+    Objects.requireNonNull(param, "Parameter string cannot be null");
 
     final String[] parts = param.split(SEPARATOR);
     final SqlParameterBuilder builder = SqlParameter.builder();
@@ -241,9 +221,15 @@ public class SqlParameter {
       return this;
     }
 
-    public SqlParameter build() {
-      Assert.notNull(type, "Parameter type cannot be null");
-      return new SqlParameter(this);
+    /**
+     * Build the SqlParameter instance.
+     *
+     * @return the SqlParameter instance
+     * @throws IllegalArgumentException if any required fields are missing
+     */
+    public SqlParameter build() throws IllegalArgumentException {
+      Objects.requireNonNull(type, "Parameter type cannot be null");
+      return new SqlParameter(name, type, mode);
     }
   }
 }

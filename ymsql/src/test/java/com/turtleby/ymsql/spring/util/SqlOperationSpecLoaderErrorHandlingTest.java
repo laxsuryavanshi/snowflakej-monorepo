@@ -1,4 +1,4 @@
-package com.turtleby.ymsql.util;
+package com.turtleby.ymsql.spring.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,7 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
-import com.turtleby.ymsql.model.SqlOperationSpec;
+import com.turtleby.ymsql.core.model.SqlOperationSpec;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("SqlOperationSpecLoader Error Handling Tests")

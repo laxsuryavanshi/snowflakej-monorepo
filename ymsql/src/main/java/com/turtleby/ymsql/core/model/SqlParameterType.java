@@ -1,4 +1,4 @@
-package com.turtleby.ymsql.model;
+package com.turtleby.ymsql.core.model;
 
 import java.io.ByteArrayInputStream;
 import java.io.StringReader;
@@ -22,6 +22,8 @@ import java.sql.Types;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Enumeration representing SQL parameter types with their corresponding aliases and setter methods.
@@ -620,7 +622,7 @@ public enum SqlParameterType {
    * @return the corresponding SqlParameterType, or OBJECT if not found or if input is null/empty
    */
   public static SqlParameterType fromString(final String typeString) {
-    if (typeString == null || typeString.trim().isEmpty()) {
+    if (StringUtils.isBlank(typeString)) {
       return OBJECT;
     }
 

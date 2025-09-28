@@ -1,4 +1,4 @@
-package com.turtleby.ymsql.model;
+package com.turtleby.ymsql.core.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;

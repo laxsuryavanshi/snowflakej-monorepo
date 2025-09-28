@@ -29,11 +29,11 @@
  * <h2>Package Structure</h2>
  *
  * <ul>
- *   <li>{@link com.turtleby.ymsql.model} - Core data models for SQL operation specifications
- *   <li>{@link com.turtleby.ymsql.util} - Utility classes for loading and parsing YAML
+ *   <li>{@link com.turtleby.ymsql.core.model} - Core data models for SQL operation specifications
+ *   <li>{@link com.turtleby.ymsql.core.dao} - Data access objects and registry for SQL operations
+ *   <li>{@link com.turtleby.ymsql.spring.util} - Utility classes for loading and parsing YAML
  *       configurations
- *   <li>{@link com.turtleby.ymsql.dao} - Data access objects and registry for SQL operations
- *   <li>{@link com.turtleby.ymsql.autoconfigure} - Spring Boot auto-configuration classes
+ *   <li>{@link com.turtleby.ymsql.spring.autoconfigure} - Spring Boot auto-configuration classes
  * </ul>
  *
  * <h2>Basic Usage</h2>
@@ -41,7 +41,8 @@
  * <ol>
  *   <li>Define your SQL operations in a YAML file (e.g., {@code sql-operations.yml})
  *   <li>Configure YmSQL in your {@code application.yml} or {@code application.properties}
- *   <li>Inject the {@link com.turtleby.ymsql.dao.SqlOperationRegistry} to access your operations
+ *   <li>Inject the {@link com.turtleby.ymsql.core.dao.SqlOperationRegistry} to access your
+ *       operations
  * </ol>
  *
  * <h2>YAML Configuration Format</h2>

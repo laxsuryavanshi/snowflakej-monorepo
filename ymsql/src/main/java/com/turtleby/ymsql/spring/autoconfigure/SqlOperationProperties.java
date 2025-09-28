@@ -1,4 +1,4 @@
-package com.turtleby.ymsql.autoconfigure;
+package com.turtleby.ymsql.spring.autoconfigure;
 
 import java.util.List;
 

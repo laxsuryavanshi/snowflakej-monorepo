@@ -1,9 +1,9 @@
-package com.turtleby.ymsql.model;
+package com.turtleby.ymsql.core.model;
 
 import java.util.List;
 import java.util.Objects;
 
-import org.springframework.util.Assert;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Specification for a SQL operation including the SQL statement, operation type, and parameter
@@ -12,52 +12,37 @@ import org.springframework.util.Assert;
  * <p>This class represents a complete specification for executing a database operation, typically
  * loaded from YAML configuration files. It encapsulates the SQL statement text, the type of
  * operation (QUERY or PROCEDURE), and detailed parameter specifications.
+ *
+ * <p>This class is immutable after creation.
  */
 public class SqlOperationSpec {
+
   /** The SQL statement or stored procedure call text. */
-  private String sql;
+  private final String sql;
 
   /** The type of SQL operation (QUERY or PROCEDURE). */
-  private SqlOperationType operationType;
+  private final SqlOperationType operationType;
 
   /** List of parameter specifications for the SQL operation. */
-  private List<SqlParameter> parameters;
-
-  public SqlOperationSpec() {}
+  private final List<SqlParameter> parameters;
 
   public SqlOperationSpec(
       final String sql, final SqlOperationType operationType, final List<SqlParameter> parameters) {
     this.sql = sql;
     this.operationType = operationType;
-    this.parameters = parameters;
-  }
-
-  public SqlOperationSpec(final SqlOperationSpecBuilder builder) {
-    this(builder.sql, builder.operationType, builder.parameters);
+    this.parameters = parameters != null ? List.copyOf(parameters) : null;
   }
 
   public String getSql() {
     return sql;
   }
 
-  public void setSql(final String sql) {
-    this.sql = sql;
-  }
-
   public SqlOperationType getOperationType() {
     return operationType;
   }
 
-  public void setOperationType(final SqlOperationType operationType) {
-    this.operationType = operationType;
-  }
-
   public List<SqlParameter> getParameters() {
     return parameters;
-  }
-
-  public void setParameters(final List<SqlParameter> parameters) {
-    this.parameters = parameters;
   }
 
   /**
@@ -163,10 +148,18 @@ public class SqlOperationSpec {
       return this;
     }
 
-    public SqlOperationSpec build() {
-      Assert.hasText(sql, "SQL must not be empty");
-      Assert.notNull(operationType, "Operation type must not be null");
-      return new SqlOperationSpec(this);
+    /**
+     * Build the SqlOperationSpec instance.
+     *
+     * @return the SqlOperationSpec instance
+     * @throws IllegalArgumentException if any required fields are missing
+     */
+    public SqlOperationSpec build() throws IllegalArgumentException {
+      if (StringUtils.isBlank(sql)) {
+        throw new IllegalArgumentException("SQL must not be null or empty");
+      }
+      Objects.requireNonNull(operationType, "Operation type must not be null");
+      return new SqlOperationSpec(sql, operationType, parameters);
     }
   }
 }

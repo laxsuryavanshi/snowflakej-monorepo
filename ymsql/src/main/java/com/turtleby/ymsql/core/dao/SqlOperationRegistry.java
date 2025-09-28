@@ -1,10 +1,10 @@
-package com.turtleby.ymsql.dao;
+package com.turtleby.ymsql.core.dao;
 
 import java.util.Map;
 
-import org.springframework.util.Assert;
+import org.apache.commons.lang3.StringUtils;
 
-import com.turtleby.ymsql.model.SqlOperationSpec;
+import com.turtleby.ymsql.core.model.SqlOperationSpec;
 
 /**
  * Registry for SQL operation specifications.
@@ -35,7 +35,9 @@ public class SqlOperationRegistry {
    * @throws IllegalArgumentException if the name is null/empty or not found
    */
   public SqlOperationSpec getOperationSpec(final String name) throws IllegalArgumentException {
-    Assert.hasText(name, "Operation name cannot be null or empty");
+    if (StringUtils.isBlank(name)) {
+      throw new IllegalArgumentException("Operation name cannot be null or empty");
+    }
 
     if (!operations.containsKey(name)) {
       throw new IllegalArgumentException("No SqlOperationSpec found with name: " + name);

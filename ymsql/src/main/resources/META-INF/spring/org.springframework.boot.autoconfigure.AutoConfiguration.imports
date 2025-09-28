@@ -1,1 +1,1 @@
-com.turtleby.ymsql.autoconfigure.YmsqlAutoConfiguration
+com.turtleby.ymsql.spring.autoconfigure.YmsqlAutoConfiguration

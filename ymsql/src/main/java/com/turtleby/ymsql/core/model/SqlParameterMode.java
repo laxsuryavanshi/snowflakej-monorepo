@@ -1,8 +1,8 @@
-package com.turtleby.ymsql.model;
+package com.turtleby.ymsql.core.model;
 
 import java.sql.ParameterMetaData;
 
-import org.springframework.util.Assert;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Enumeration representing SQL parameter modes for stored procedures and functions. This enum
@@ -18,6 +18,7 @@ import org.springframework.util.Assert;
  * </ul>
  */
 public enum SqlParameterMode {
+
   /** Input parameter - value is passed to the procedure/function. */
   IN(ParameterMetaData.parameterModeIn),
 
@@ -98,7 +99,9 @@ public enum SqlParameterMode {
    * @return the corresponding SqlParameterMode, or IN if not found or null
    */
   public static SqlParameterMode fromString(final String mode) {
-    Assert.hasText(mode, "Parameter mode string must not be null or empty");
+    if (StringUtils.isBlank(mode)) {
+      throw new IllegalArgumentException("Parameter mode string must not be null or empty");
+    }
 
     return switch (mode.trim().toUpperCase()) {
       case "IN" -> IN;

@@ -1,4 +1,4 @@
-package com.turtleby.ymsql.util;
+package com.turtleby.ymsql.spring.util;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -15,10 +15,10 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.ResourceUtils;
 import org.yaml.snakeyaml.Yaml;
 
-import com.turtleby.ymsql.model.SqlOperationSpec;
-import com.turtleby.ymsql.model.SqlParameter;
-import com.turtleby.ymsql.model.SqlParameterMode;
-import com.turtleby.ymsql.model.SqlParameterType;
+import com.turtleby.ymsql.core.model.SqlOperationSpec;
+import com.turtleby.ymsql.core.model.SqlParameter;
+import com.turtleby.ymsql.core.model.SqlParameterMode;
+import com.turtleby.ymsql.core.model.SqlParameterType;
 
 /**
  * Utility class responsible for loading and parsing SQL operation specifications from YAML
