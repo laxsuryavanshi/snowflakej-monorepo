@@ -27,5 +27,6 @@
     <module>shared-dependencies</module>
     <module>spring-dependencies</module>
     <module>ymsql</module>
+    <module>multitenancy</module>
   </modules>
 </project>
