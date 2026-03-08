@@ -2,6 +2,7 @@ package com.turtleby.multitenancy.context;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.lang.Nullable;
 
 /** Thread-local (inheritable) holder for current {@link TenantContext}. */
 public class TenantContextHolder {
@@ -16,6 +17,7 @@ public class TenantContextHolder {
   }
 
   /** Current context. */
+  @Nullable
   public static TenantContext getContext() {
     return CONTEXT.get();
   }
