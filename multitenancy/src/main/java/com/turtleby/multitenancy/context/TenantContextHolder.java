@@ -4,12 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.lang.Nullable;
 
-/** Thread-local (inheritable) holder for current {@link TenantContext}. */
+/** Thread-local holder for current {@link TenantContext}. */
 public class TenantContextHolder {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(TenantContextHolder.class);
 
-  private static final ThreadLocal<TenantContext> CONTEXT = new InheritableThreadLocal<>();
+  private static final ThreadLocal<TenantContext> CONTEXT = new ThreadLocal<>();
 
   /** Private constructor to prevent instantiation. */
   private TenantContextHolder() {

@@ -132,14 +132,15 @@ class TenantContextHolderTest {
   }
 
   @Test
-  void shouldInheritContextInChildThread() throws InterruptedException {
+  void shouldNotInheritContextInChildThread() throws InterruptedException {
     TestTenant parentTenant = new TestTenant("parent-tenant", "parent_schema");
     TenantContextHolder.setContext(new TenantContext(parentTenant));
 
     AtomicReference<String> childTenantId = new AtomicReference<>();
     CountDownLatch latch = new CountDownLatch(1);
 
-    // Create child thread that should inherit the parent's context
+    // Child thread must NOT inherit parent's context — callers are responsible for explicit
+    // propagation.
     Thread childThread =
         new Thread(
             () -> {
@@ -154,8 +155,8 @@ class TenantContextHolderTest {
     childThread.start();
     assertThat(latch.await(5, TimeUnit.SECONDS)).isTrue();
 
-    // Verify child thread inherited parent's context
-    assertThat(childTenantId.get()).isEqualTo("parent-tenant");
+    // Verify child thread does not inherit parent's context
+    assertThat(childTenantId.get()).isNull();
   }
 
   @Test
