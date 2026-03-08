@@ -96,29 +96,39 @@ public class SchemaAwareDataSource extends DelegatingDataSource {
    * @throws IllegalStateException if no tenant context is available
    */
   private Connection wrapConnection(Connection connection) throws SQLException {
-    TenantContext context = TenantContextHolder.getContext();
-    if (context == null) {
-      throw new IllegalStateException("No tenant context set in current thread");
+    try {
+      TenantContext context = TenantContextHolder.getContext();
+      if (context == null) {
+        throw new IllegalStateException("No tenant context set in current thread");
+      }
+
+      Tenant tenant = context.getTenant();
+      if (tenant == null) {
+        throw new IllegalStateException("No tenant set in current context");
+      }
+
+      String schema = tenant.getSchema();
+      if (schema == null) {
+        throw new IllegalStateException(
+            "Tenant " + tenant.getTenantId() + " does not have a schema set");
+      }
+
+      setSchema(connection, schema);
+
+      return (Connection)
+          Proxy.newProxyInstance(
+              Connection.class.getClassLoader(),
+              new Class[] {Connection.class},
+              new SchemaAwareConnectionProxy(connection));
+    } catch (RuntimeException ex) {
+      // Close the connection before propagating exception to prevent connection leak
+      try {
+        connection.close();
+      } catch (SQLException suppressedEx) {
+        ex.addSuppressed(suppressedEx);
+      }
+      throw ex;
     }
-
-    Tenant tenant = context.getTenant();
-    if (tenant == null) {
-      throw new IllegalStateException("No tenant set in current context");
-    }
-
-    String schema = tenant.getSchema();
-    if (schema == null) {
-      throw new IllegalStateException(
-          "Tenant " + tenant.getTenantId() + " does not have a schema set");
-    }
-
-    setSchema(connection, schema);
-
-    return (Connection)
-        Proxy.newProxyInstance(
-            Connection.class.getClassLoader(),
-            new Class[] {Connection.class},
-            new SchemaAwareConnectionProxy(connection));
   }
 
   /**
