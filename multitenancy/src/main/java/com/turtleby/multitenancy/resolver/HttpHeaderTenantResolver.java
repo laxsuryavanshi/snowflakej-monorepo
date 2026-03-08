@@ -5,7 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
-import com.turtleby.multitenancy.config.TenantProperties;
+import com.turtleby.multitenancy.configuration.TenantProperties;
 
 /** Resolves tenant id from configured HTTP header. */
 public class HttpHeaderTenantResolver implements TenantResolver<HttpServletRequest> {

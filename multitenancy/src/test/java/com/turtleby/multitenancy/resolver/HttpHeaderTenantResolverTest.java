@@ -17,7 +17,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.turtleby.multitenancy.config.TenantProperties;
+import com.turtleby.multitenancy.configuration.TenantProperties;
 
 /**
  * Unit tests for {@link HttpHeaderTenantResolver}. Tests tenant ID extraction from HTTP headers.

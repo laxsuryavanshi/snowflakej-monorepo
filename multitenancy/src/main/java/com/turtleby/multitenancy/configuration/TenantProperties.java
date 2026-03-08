@@ -1,4 +1,4 @@
-package com.turtleby.multitenancy.config;
+package com.turtleby.multitenancy.configuration;
 
 import java.util.Objects;
 
