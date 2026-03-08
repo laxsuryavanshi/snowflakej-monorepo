@@ -1,5 +1,7 @@
 package com.turtleby.multitenancy.web;
 
+import java.util.Objects;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -24,8 +26,9 @@ public class TenantInterceptor implements HandlerInterceptor {
   public TenantInterceptor(
       final TenantResolver<HttpServletRequest> tenantResolver,
       final TenantDetailsService tenantDetailsService) {
-    this.tenantResolver = tenantResolver;
-    this.tenantDetailsService = tenantDetailsService;
+    this.tenantResolver = Objects.requireNonNull(tenantResolver, "tenantResolver must not be null");
+    this.tenantDetailsService =
+        Objects.requireNonNull(tenantDetailsService, "tenantDetailsService must not be null");
   }
 
   /**

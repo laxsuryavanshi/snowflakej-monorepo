@@ -1,5 +1,7 @@
 package com.turtleby.multitenancy.web;
 
+import java.util.Objects;
+
 import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -11,7 +13,8 @@ public class TenantWebMvcConfigurer implements WebMvcConfigurer {
 
   /** Ctor. */
   public TenantWebMvcConfigurer(final TenantInterceptor tenantInterceptor) {
-    this.tenantInterceptor = tenantInterceptor;
+    this.tenantInterceptor =
+        Objects.requireNonNull(tenantInterceptor, "tenantInterceptor must not be null");
   }
 
   /**

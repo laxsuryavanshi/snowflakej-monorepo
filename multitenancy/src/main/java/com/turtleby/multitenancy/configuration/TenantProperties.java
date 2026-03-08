@@ -36,7 +36,7 @@ public class TenantProperties {
   }
 
   public void setHttp(Http http) {
-    this.http = http;
+    this.http = Objects.requireNonNull(http, "http must not be null");
   }
 
   /** HTTP resolution options. */

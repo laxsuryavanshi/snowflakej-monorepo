@@ -1,5 +1,7 @@
 package com.turtleby.multitenancy.resolver;
 
+import java.util.Objects;
+
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.lang.Nullable;
@@ -18,7 +20,8 @@ public class HttpHeaderTenantResolver implements TenantResolver<HttpServletReque
    * @param tenantProperties the tenant configuration properties, must not be {@code null}
    */
   public HttpHeaderTenantResolver(final TenantProperties tenantProperties) {
-    this.tenantProperties = tenantProperties;
+    this.tenantProperties =
+        Objects.requireNonNull(tenantProperties, "tenantProperties must not be null");
   }
 
   /**
