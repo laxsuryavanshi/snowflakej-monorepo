@@ -170,7 +170,7 @@ class TenantContextHolderTest {
 
   @Test
   void shouldHandleEmptyContext() {
-    TenantContext emptyContext = new TenantContext();
+    TenantContext emptyContext = new TenantContext(null);
     TenantContextHolder.setContext(emptyContext);
 
     TenantContext retrievedContext = TenantContextHolder.getContext();

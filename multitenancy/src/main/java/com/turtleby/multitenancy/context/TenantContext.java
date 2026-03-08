@@ -5,20 +5,7 @@ import org.springframework.lang.Nullable;
 import com.turtleby.multitenancy.core.Tenant;
 
 /** Immutable holder of current {@link Tenant}. */
-public class TenantContext {
-
-  private final Tenant tenant;
-
-  /** Empty context. */
-  public TenantContext() {
-    this(null);
-  }
-
-  /** Context with tenant (nullable). */
-  public TenantContext(final Tenant tenant) {
-    this.tenant = tenant;
-  }
-
+public record TenantContext(@Nullable Tenant tenant) {
   /**
    * Returns the tenant associated with this context.
    *
@@ -27,11 +14,5 @@ public class TenantContext {
   @Nullable
   public Tenant getTenant() {
     return tenant;
-  }
-
-  /** String representation. */
-  @Override
-  public String toString() {
-    return "TenantContext [tenant=" + tenant + "]";
   }
 }
